@@ -5,7 +5,7 @@ export class Utils {
     public static async executeQuery<T>(queryString: string): Promise<T> {
         return await getConnection().query(queryString)
             .then((response: any) => {
-                return Utils.newResolvedPromise(response);
+                return this.newResolvedPromise(response);
             })
     }
 
