@@ -1,5 +1,6 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { MetadataService } from '../services';
+import { QueryParams } from '../model';
 
 @Controller('metadata/v1.0')
 export class MetadataController {
@@ -7,8 +8,8 @@ export class MetadataController {
 
 
   @Get(':object')
-  async getList(@Param() params): Promise<any> {
-    return await this.metadataService.getList(params.object);
+  async getList(@Param() params, @Query() query: QueryParams): Promise<any> {
+    return await this.metadataService.getList(params.object, query);
   }
 
 }
