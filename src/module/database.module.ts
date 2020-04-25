@@ -4,6 +4,6 @@ import { Connections } from '../database';
 
 
 @Module({
-    imports: [TypeOrmModule.forRoot(Connections.postgres)]
+    imports: [TypeOrmModule.forRoot(Connections.mysql)]
 })
 export class DatabaseModule { }
