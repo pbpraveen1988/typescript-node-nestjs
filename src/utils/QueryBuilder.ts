@@ -3,7 +3,6 @@ import { QueryParams } from '../model';
 
 
 export class QueryBuilder {
-
     /*
     * @author : Praveen Kumar
     * @comment : Will generate the statement for where clause from URL 
@@ -96,6 +95,29 @@ export class QueryBuilder {
             }
         });
         return ` where ${_whereString}`;
+    }
+
+    /*
+    * @author : Praveen Kumar
+    * @comment : Will create the SQL query to get single record based on Id or Key
+    * @date: 2020-04-26 11:21:52
+    */
+    public static SelectRecord = async (tableName: string, idOrKey: string, queryParams?: QueryParams): Promise<Object> => {
+        let queryString = '';
+        if (queryParams && queryParams.select) {
+            const _fields = queryParams.select === 'all' ? '*' : queryParams.select;
+            queryString = `Select ${_fields} from ${tableName} `;
+        } else {
+            const _fields = `*`;
+            queryString = `Select ${_fields} from ${tableName} `;
+        }
+        queryString += ` where id = "${idOrKey}" `;   // Will add the key field also later.
+        const _record = await Utils.executeQuery(queryString);
+        if (_record[0]) {
+            return _record[0];
+        } else {
+            return _record;
+        }
     }
 
 

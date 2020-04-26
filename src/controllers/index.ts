@@ -1,2 +1,2 @@
 export * from './app.controller';
-export * from './metadata.controller';
+export * from './data.controller';
